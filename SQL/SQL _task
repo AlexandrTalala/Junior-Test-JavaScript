@@ -1,0 +1,167 @@
+Создаем БД:
+CREATE DATABASE `MyDatabase` CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+Создания нужных таблиц:
+
+Тестируемые ученики (имя)
+Проведённые тесты (дата, типы примеров, кол-во правильных и  неправильных ответов)
+Неправильно решенные при тестировании примеры (пример, неверный ответ)
+CREATE TABLE NameStudent(ID int  AUTO_INCREMENT, RegisterName varchar(255), PRIMARY KEY (ID));
+CREATE TABLE TestsConducted (ID int  AUTO_INCREMENT, Name varchar(255), DateTest date, TypesExamples varchar(255), CountCorrect integer, CountError integer,  PRIMARY KEY (ID));
+CREATE TABLE ErrorDecision (ID int  AUTO_INCREMENT, Example varchar(255), ErrorAnswer varchar(255), PRIMARY KEY (ID));
+
+Сохранения результата тестирования:
+Пример для таблицы NameStudent: 
+INSERT INTO NameStudent (RegisterName ) VALUES ('Name1');
+INSERT INTO NameStudent (RegisterName ) VALUES ('Name2');
+INSERT INTO NameStudent (RegisterName ) VALUES ('Name3');
+INSERT INTO NameStudent (RegisterName ) VALUES ('Name4');
+INSERT INTO NameStudent (RegisterName ) VALUES ('Name5');
+INSERT INTO NameStudent (RegisterName ) VALUES ('Name6');
+INSERT INTO NameStudent (RegisterName ) VALUES ('Name7');
+INSERT INTO NameStudent (RegisterName ) VALUES ('Name8');
+INSERT INTO NameStudent (RegisterName ) VALUES ('Name9');
+INSERT INTO NameStudent (RegisterName ) VALUES ('Name10');
+INSERT INTO NameStudent (RegisterName ) VALUES ('Name11');
+INSERT INTO NameStudent (RegisterName ) VALUES ('Name12');
+INSERT INTO NameStudent (RegisterName ) VALUES ('Name7');
+INSERT INTO NameStudent (RegisterName ) VALUES ('Name8');
+INSERT INTO NameStudent (RegisterName ) VALUES ('Name9');
+INSERT INTO NameStudent (RegisterName ) VALUES ('Name10');
+INSERT INTO NameStudent (RegisterName ) VALUES ('Name11');
+INSERT INTO NameStudent (RegisterName ) VALUES ('Name12');
+
+Пример для таблицы TestsConducted: 
+INSERT INTO TestsConducted (Name, DateTest, TypesExamples, CountCorrect, CountError) VALUES ('Name1', '2016-06-01', 'Operation plus',10,0);
+INSERT INTO TestsConducted (Name, DateTest, TypesExamples, CountCorrect, CountError) VALUES ('Name2', '2016-06-02', 'Operation minus',15,1);
+INSERT INTO TestsConducted (Name, DateTest, TypesExamples, CountCorrect, CountError) VALUES ('Name3', '2016-06-03', 'Operation multiplication',7,0);
+INSERT INTO TestsConducted (Name, DateTest, TypesExamples, CountCorrect, CountError) VALUES ('Name4', '2016-06-04', 'Operation division',20,3);
+INSERT INTO TestsConducted (Name, DateTest, TypesExamples, CountCorrect, CountError) VALUES ('Name5', '2016-06-05', 'Operation plus',9,0);
+INSERT INTO TestsConducted (Name, DateTest, TypesExamples, CountCorrect, CountError) VALUES ('Name6', '2016-06-06', 'Operation minus',5,1);
+INSERT INTO TestsConducted (Name, DateTest, TypesExamples, CountCorrect, CountError) VALUES ('Name7', '2016-06-07', 'Operation multiplication',5,0);
+INSERT INTO TestsConducted (Name, DateTest, TypesExamples, CountCorrect, CountError) VALUES ('Name8', '2016-06-07', 'Operation division',15,0);
+INSERT INTO TestsConducted (Name, DateTest, TypesExamples, CountCorrect, CountError) VALUES ('Name5', '2016-06-07', 'Operation plus',9,0);
+INSERT INTO TestsConducted (Name, DateTest, TypesExamples, CountCorrect, CountError) VALUES ('Name6', '2016-06-07', 'Operation minus',5,1);
+INSERT INTO TestsConducted (Name, DateTest, TypesExamples, CountCorrect, CountError) VALUES ('Name7', '2016-06-07', 'Operation multiplication',5,0);
+INSERT INTO TestsConducted (Name, DateTest, TypesExamples, CountCorrect, CountError) VALUES ('Name8', '2016-06-07', 'Operation division',15,0);
+INSERT INTO TestsConducted (Name, DateTest, TypesExamples, CountCorrect, CountError) VALUES ('Name5', '2016-06-07', 'Operation plus',9,0);
+INSERT INTO TestsConducted (Name, DateTest, TypesExamples, CountCorrect, CountError) VALUES ('Name6', '2016-06-07', 'Operation minus',5,1);
+INSERT INTO TestsConducted (Name, DateTest, TypesExamples, CountCorrect, CountError) VALUES ('Name7', '2016-06-08', 'Operation multiplication',5,0);
+INSERT INTO TestsConducted (Name, DateTest, TypesExamples, CountCorrect, CountError) VALUES ('Name8', '2016-06-08', 'Operation division',15,0);
+INSERT INTO TestsConducted (Name, DateTest, TypesExamples, CountCorrect, CountError) VALUES ('Name5', '2016-06-08', 'Operation plus',9,0);
+INSERT INTO TestsConducted (Name, DateTest, TypesExamples, CountCorrect, CountError) VALUES ('Name6', '2016-06-10', 'Operation minus',5,1);
+INSERT INTO TestsConducted (Name, DateTest, TypesExamples, CountCorrect, CountError) VALUES ('Name7', '2016-06-10', 'Operation multiplication',5,0);
+INSERT INTO TestsConducted (Name, DateTest, TypesExamples, CountCorrect, CountError) VALUES ('Name8', '2016-06-11', 'Operation division',15,0);
+
+Пример для таблицы ErrorDecision: 
+INSERT INTO ErrorDecision (Example, ErrorAnswer) VALUES ('5+2', '8');
+INSERT INTO ErrorDecision (Example, ErrorAnswer) VALUES ('5+5', '9');
+INSERT INTO ErrorDecision (Example, ErrorAnswer) VALUES ('6-5', '2');
+INSERT INTO ErrorDecision (Example, ErrorAnswer) VALUES ('10-5', '6');
+INSERT INTO ErrorDecision (Example, ErrorAnswer) VALUES ('5+9', '15');
+
+Получения отчетов. Выполнить сортировку по дате (от настоящего к прошлому) и имени тестируемого ученика (алфавитный порядок):
+SELECT * FROM TestsConducted 
+order by DateTest asc;
++----+-------+------------+--------------------------+--------------+------------+
+| ID | Name  | DateTest   | TypesExamples            | CountCorrect | CountError |
++----+-------+------------+--------------------------+--------------+------------+
+|  1 | Name1 | 2016-06-01 | Operation plus           |           10 |          0 |
+|  2 | Name2 | 2016-06-02 | Operation minus          |           15 |          1 |
+|  3 | Name3 | 2016-06-03 | Operation multiplication |            7 |          0 |
+|  4 | Name4 | 2016-06-04 | Operation division       |           20 |          3 |
+|  5 | Name5 | 2016-06-05 | Operation plus           |            9 |          0 |
+|  6 | Name6 | 2016-06-06 | Operation minus          |            5 |          1 |
+|  7 | Name7 | 2016-06-07 | Operation multiplication |            5 |          0 |
+|  8 | Name8 | 2016-06-07 | Operation division       |           15 |          0 |
+|  9 | Name5 | 2016-06-07 | Operation plus           |            9 |          0 |
+| 10 | Name6 | 2016-06-07 | Operation minus          |            5 |          1 |
+| 11 | Name7 | 2016-06-07 | Operation multiplication |            5 |          0 |
+| 12 | Name8 | 2016-06-07 | Operation division       |           15 |          0 |
+| 13 | Name5 | 2016-06-07 | Operation plus           |            9 |          0 |
+| 14 | Name6 | 2016-06-07 | Operation minus          |            5 |          1 |
+| 15 | Name7 | 2016-06-08 | Operation multiplication |            5 |          0 |
+| 16 | Name8 | 2016-06-08 | Operation division       |           15 |          0 |
+| 17 | Name5 | 2016-06-08 | Operation plus           |            9 |          0 |
+| 18 | Name6 | 2016-06-10 | Operation minus          |            5 |          1 |
+| 19 | Name7 | 2016-06-10 | Operation multiplication |            5 |          0 |
+| 20 | Name8 | 2016-06-11 | Operation division       |           15 |          0 |
++----+-------+------------+--------------------------+--------------+------------+
+
+SELECT * FROM TestsConducted
+order by TestsConducted.Name asc;
++----+-------+------------+--------------------------+--------------+------------+
+| ID | Name  | DateTest   | TypesExamples            | CountCorrect | CountError |
++----+-------+------------+--------------------------+--------------+------------+
+|  1 | Name1 | 2016-06-01 | Operation plus           |           10 |          0 |
+|  2 | Name2 | 2016-06-02 | Operation minus          |           15 |          1 |
+|  3 | Name3 | 2016-06-03 | Operation multiplication |            7 |          0 |
+|  4 | Name4 | 2016-06-04 | Operation division       |           20 |          3 |
+|  5 | Name5 | 2016-06-05 | Operation plus           |            9 |          0 |
+|  9 | Name5 | 2016-06-07 | Operation plus           |            9 |          0 |
+| 13 | Name5 | 2016-06-07 | Operation plus           |            9 |          0 |
+| 17 | Name5 | 2016-06-08 | Operation plus           |            9 |          0 |
+|  6 | Name6 | 2016-06-06 | Operation minus          |            5 |          1 |
+| 10 | Name6 | 2016-06-07 | Operation minus          |            5 |          1 |
+| 14 | Name6 | 2016-06-07 | Operation minus          |            5 |          1 |
+| 18 | Name6 | 2016-06-10 | Operation minus          |            5 |          1 |
+|  7 | Name7 | 2016-06-07 | Operation multiplication |            5 |          0 |
+| 11 | Name7 | 2016-06-07 | Operation multiplication |            5 |          0 |
+| 15 | Name7 | 2016-06-08 | Operation multiplication |            5 |          0 |
+| 19 | Name7 | 2016-06-10 | Operation multiplication |            5 |          0 |
+|  8 | Name8 | 2016-06-07 | Operation division       |           15 |          0 |
+| 12 | Name8 | 2016-06-07 | Operation division       |           15 |          0 |
+| 16 | Name8 | 2016-06-08 | Operation division       |           15 |          0 |
+| 20 | Name8 | 2016-06-11 | Operation division       |           15 |          0 |
++----+-------+------------+--------------------------+--------------+------------+
+
+Показать учеников, прошедших тестирование за указанный период (имя, дата, типы решённых примеров, кол-во правильно и неправильно решённых примеров, результат = % правильных ответов)
+SELECT 	DateTest, Name, TypesExamples, CountCorrect, CountError, 100*((CountCorrect/(CountCorrect+CountError))-(CountError/(CountCorrect+CountError))) AS percentage
+FROM TestsConducted 
+WHERE (DateTest BETWEEN '2016-06-01' AND '2016-06-06');
++------------+-------+--------------------------+--------------+------------+------------+
+| DateTest   | Name  | TypesExamples            | CountCorrect | CountError | percentage |
++------------+-------+--------------------------+--------------+------------+------------+
+| 2016-06-01 | Name1 | Operation plus           |           10 |          0 |   100.0000 |
+| 2016-06-02 | Name2 | Operation minus          |           15 |          1 |    87.5000 |
+| 2016-06-03 | Name3 | Operation multiplication |            7 |          0 |   100.0000 |
+| 2016-06-04 | Name4 | Operation division       |           20 |          3 |    73.9130 |
+| 2016-06-05 | Name5 | Operation plus           |            9 |          0 |   100.0000 |
+| 2016-06-06 | Name6 | Operation minus          |            5 |          1 |    66.6667 |
++------------+-------+--------------------------+--------------+------------+------------+
+
+Показать учеников, ни разу за период не проходивших тестирование: 
+SELECT NameStudent.RegisterName FROM  NameStudent
+LEFT JOIN  TestsConducted
+ON NameStudent.RegisterName=TestsConducted.Name
+WHERE TestsConducted.Name IS NULL;
++--------------+
+| RegisterName |
++--------------+
+| Name9        |
+| Name10       |
+| Name11       |
+| Name12       |
+| Name9        |
+| Name10       |
+| Name11       |
+| Name12       |
++--------------+
+
+Ученики, проходившие тестирование не менее трёх раз за указанный период, результат которых не превысил 50%
+SELECT TestsConducted.Name, COUNT(TestsConducted.Name) AS 'CountName'
+FROM TestsConducted
+WHERE 
+(DateTest BETWEEN '2016-06-01' AND '2016-06-08')
+AND 
+(100*((CountCorrect/(CountCorrect+CountError))-(CountError/(CountCorrect+CountError))))>=50
+GROUP BY Name
+HAVING CountName>=3;
++-------+-----------+
+| Name  | CountName |
++-------+-----------+
+| Name5 |         4 |
+| Name6 |         3 |
+| Name7 |         3 |
+| Name8 |         3 |
++-------+-----------+

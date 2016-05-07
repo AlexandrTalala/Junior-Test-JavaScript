@@ -123,36 +123,97 @@
      * Click button Start test
      * @type {Number}
      */
+
     var startTest = document.getElementById("startTest");
     startTest.onclick = function() {
         var count = 0;
         count++;
         if (count > 0) {
-            startTest.value = 'Продолжить';
+            startTest.value = "Продолжить";
         }
-        var indSelected = document.getElementById("selectedOperation").selectedIndex;
-        if (indSelected == 0) {
-            plusOperation();
-            htmlNumberFirst.innerHTML = numberFirst;
-            htmlNumberSecond.innerHTML = numberSecond;
+
+
+        /**
+         * [value Checkbox]
+         * @type {string}
+         */
+
+        var valueCheckboxPlus = document.getElementById("checkboxPlus").value;
+        var valueCheckboxMinus = document.getElementById("checkboxMinus").value;
+        var valueCheckboxMultiplication = document.getElementById("checkboxMultiplication").value;
+        var valueCheckboxDivision = document.getElementById("checkboxDivision").value;
+        var arValue = new Array();
+        arValue[0] = valueCheckboxPlus;
+        arValue[1] = valueCheckboxMinus;
+        arValue[2] = valueCheckboxMultiplication;
+        arValue[3] = valueCheckboxDivision;
+
+
+        /**
+         * [checked Checbox]
+         * @type {string}
+         */
+
+        var Plus = document.getElementById("checkboxPlus").checked;
+        var Minus = document.getElementById("checkboxMinus").checked;
+        var Multiplication = document.getElementById("checkboxMultiplication").checked;
+        var Division = document.getElementById("checkboxDivision").checked;
+        var ar = new Array();
+        ar[0] = Plus;
+        ar[1] = Minus;
+        ar[2] = Multiplication;
+        ar[3] = Division;
+
+
+        /**
+         * [array function operation]
+         * @type {Array}
+         */
+
+        var arTrue = new Array();
+        for (var i = 0; i < ar.length; i++) {
+            if (ar[i] == true) {
+                window.arTrue = arTrue.push(arValue[i]);
+            }
         }
-        if (indSelected == 1) {
-            minusOperation();
-            htmlNumberFirst.innerHTML = numberSecond;
-            htmlNumberSecond.innerHTML = numberFirst;
+        if (arTrue.length > 0) {
+
+            var rand;
+            var min = 1,
+                max = arTrue.length,
+                rand = min - 0.5 + Math.random() * (max - min + 1)
+            rand = Math.round(rand);
+            var result = arTrue[rand - 1];
+            result = String(result);
+            if (result == "checkboxPlus") {
+                plusOperation();
+                htmlNumberFirst.innerHTML = numberFirst;
+                htmlNumberSecond.innerHTML = numberSecond;
+            }
+            if (result == "checkboxMinus") {
+                minusOperation();
+                htmlNumberFirst.innerHTML = numberSecond;
+                htmlNumberSecond.innerHTML = numberFirst;
+            }
+            if (result == "checkboxMultiplication") {
+                multiplicationOperation();
+                htmlNumberFirst.innerHTML = numberFirst;
+                htmlNumberSecond.innerHTML = numberSecond;
+            }
+            if (result == "checkboxDivision") {
+                divisionOperation();
+                htmlNumberFirst.innerHTML = numberSecond;
+                htmlNumberSecond.innerHTML = numberFirst;
+            }
+
+
+        } else {
+            alert("Нужно обязательно выбрать пример в меню \"Установка\"");
+
         }
-        if (indSelected == 2) {
-            multiplicationOperation();
-            htmlNumberFirst.innerHTML = numberFirst;
-            htmlNumberSecond.innerHTML = numberSecond;
-        }
-        if (indSelected == 3) {
-            divisionOperation();
-            htmlNumberFirst.innerHTML = numberSecond;
-            htmlNumberSecond.innerHTML = numberFirst;
-        }
+
+
         htmlOperation.innerHTML = Operation;
-        // htmlRandomResult.innerHTML = randomResult;
         htmLequally.innerHTML = "=";
         buttomOk.disabled = false;
         startTest.disabled = true;
@@ -206,4 +267,29 @@
         document.getElementById("resultInner").value = "";
     };
 
+
+
+
+
+
+
+}());
+
+(function() {
+    var inspection = document.getElementById("inspection");
+    inspection.onclick = function() {
+
+        var setupClass = document.getElementById("setup").classList;
+        setupClass.value = "display_none";
+        var blockInfoClass = document.getElementById("block__info").classList;
+        blockInfoClass.value = "block__info display_block";
+    }
+
+    var setting = document.getElementById("setting");
+    setting.onclick = function() {
+        var setupClass = document.getElementById("setup").classList;
+        setupClass.value = "setup display_block";
+        var blockInfoClass = document.getElementById("block__info").classList;
+        blockInfoClass.value = "display_none";
+    }
 }());

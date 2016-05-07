@@ -22,16 +22,24 @@
 </head>
 
 <body>
-    <div class="setup">
-        <select id="selectedOperation" class="select-operation btn btn-warning" name="select_1">
-            <option selected name="1" value="Примеры с плюсом">Примеры с плюсом</option>
-            <option name="2" value="Примеры с минусом">Примеры с минусом</option>
-            <option name="3" value="Примеры с умножением">Примеры с умножением</option>
-            <option name="4" value="Примеры с делением">Примеры с делением</option>
-        </select>
-    </div>
+    <ul class="nav nav-tabs">
+        <li role="presentation"><a id="inspection" href="#">Проверка</a></li>
+        <li role="presentation"><a id="setting" href="#">Установка</a></li>
+    </ul>
     <div class="info">
-        <div class="block__info">
+        <div id="setup" class="display_none">
+            <form id="selectedOperation" class="checkbox">
+                <input checked type="checkbox" id="checkboxPlus" name="checkbox" value="checkboxPlus" /> Примеры с плюсом
+                <br>
+                <input type="checkbox" id="checkboxMinus" name="checkbox" value="checkboxMinus" />Примеры с минусом
+                <br>
+                <input type="checkbox" id="checkboxMultiplication" name="checkbox" value="checkboxMultiplication" />Примеры с умножением
+                <br>
+                <input type="checkbox" id="checkboxDivision" name="checkbox" value="checkboxDivision" />Примеры с делением
+                <br>
+            </form>
+        </div>
+        <div id="block__info" class="block__info">
             <h2>Пример:</h2>
             <span id="numFirst"></span>
             <span id="operation"></span>
